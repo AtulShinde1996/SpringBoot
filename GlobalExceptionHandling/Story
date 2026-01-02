@@ -1,0 +1,121 @@
+1. Beginner Level
+Q1: Custom Exception
+
+Task: Create a ProductNotFoundException and throw it in a GET /products/{id} endpoint when product ID does not exist.
+
+Requirement: Handle it with @ExceptionHandler in the same controller.
+
+Expected Outcome: Return 404 with JSON message: {"status":404,"message":"Product not found","timestamp":...}
+-===================================================
+
+Q2: Illegal Argument Handling
+
+Task: Create an endpoint /calculate/{number} that throws IllegalArgumentException if the number is negative.
+
+Requirement: Return 400 status with error message.
+
+Expected Outcome: JSON with status, message, timestamp.
+=========================================
+Q3: Default Spring Boot Error
+
+Task: Make an endpoint that divides two numbers from query params. Do not handle divide-by-zero manually.
+
+Question: What JSON response does Spring Boot return by default for arithmetic exceptions?
+
+Expected Outcome: Learn about default error handling (BasicErrorController).
+===========================================
+2. Intermediate Level
+Q4: Global Exception Handling
+
+Task: Convert your controller-level exception handlers to a global handler using @RestControllerAdvice.
+
+Requirement: Handle ProductNotFoundException and IllegalArgumentException.
+
+Extra: Add a details field showing the request URI.
+
+Expected Outcome: All exceptions are returned in consistent JSON.
+
+Q5: Validation Exception
+
+Task: Create a User class with fields name (not null) and email (valid email).
+
+public class User {
+    @NotBlank
+    private String name;
+
+    @Email
+    private String email;
+}
+
+
+Create endpoint /users with @PostMapping to create a user.
+
+Requirement: Handle MethodArgumentNotValidException globally and return JSON listing all field errors.
+
+Expected Outcome:
+
+{
+  "status": 400,
+  "timestamp": ...,
+  "errors": {
+    "name": "must not be blank",
+    "email": "must be a valid email"
+  }
+}
+
+Q6: Exception Hierarchy
+
+Task: Create a base exception ApiException and two child exceptions:
+
+ResourceNotFoundException → 404
+
+UnauthorizedException → 401
+
+Requirement: Global handler should catch all ApiException and return appropriate HTTP status.
+
+Goal: Learn inheritance-based exception handling.
+
+3. Advanced Level
+Q7: Logging Exceptions
+
+Task: Modify the global exception handler to log all exceptions using SLF4J.
+
+Requirement: Include stack trace in logs but don’t expose it in JSON.
+
+Goal: Learn safe error logging for production.
+
+Q8: Externalizing Error Messages
+
+Task: Store all exception messages in messages.properties and return messages from there in the global handler.
+
+Requirement: Support internationalization (i18n) for en and fr languages.
+
+Goal: Learn how to make error responses user-friendly and translatable.
+
+Q9: Reactive Exception Handling (WebFlux)
+
+Task: Create a Mono<User> endpoint in WebFlux that throws UserNotFoundException.
+
+Requirement: Handle the exception with @ExceptionHandler in a @RestControllerAdvice.
+
+Goal: Understand exception handling in reactive programming.
+
+Q10: Custom Error Codes
+
+Task: Extend ErrorResponse to include a custom errorCode field (like USR_404).
+
+Requirement: Each exception type should return a specific error code along with message and timestamp.
+
+Goal: Learn best practices for enterprise-grade API error responses.
+
+4. Extra Challenges (For Interviews / Advanced Practice)
+
+Handle multiple exceptions in one method using @ExceptionHandler({A.class, B.class}).
+
+Write unit tests for global exception handling using MockMvc.
+
+Return HTTP 422 (Unprocessable Entity) for business logic validation failures.
+
+Integrate Spring Security exceptions (like AccessDeniedException) into your global handler.
+
+Design a completely reusable exception framework for a large project (custom exceptions, codes, i18n messages).
