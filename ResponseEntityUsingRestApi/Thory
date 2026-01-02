@@ -1,0 +1,54 @@
+ResponseEntity -:
+
+ResponseEntity is used to customize HTTP response body, status code, and headers 
+in Spring REST APIs.(only use in controller class.)
+
+ResponseEntity is a Spring class used to represent the entire HTTP response in REST APIs.
+
+It allows you to control:
+
+✅ HTTP status code (200, 201, 404, etc.)
+
+✅ Response body
+
+✅ HTTP headers
+
+-------------------------------------------------------------------
+Why use ResponseEntity?
+
+Because it gives full control over the response sent to the client.
+
+--------------------------------------------------------------------
+Common Use Cases -->
+
+
+1. Success response
+
+return ResponseEntity.ok("Data saved");
+
+
+2. Created (201)
+
+return ResponseEntity.status(HttpStatus.CREATED).body(user);
+
+
+3. No content (204)
+
+return ResponseEntity.noContent().build();
+
+
+4. Error response
+
+return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                     .body("User not found");
+                     
+ -------------------------------------------------------------------------
+ | Method                            | HTTP Status / Usage  |
+| --------------------------------- | -------------------- |
+| `ok(body)`                        | 200 OK               |
+| `status(HttpStatus).body(body)`   | Custom status + body |
+| `badRequest().body(body)`         | 400 Bad Request      |
+| `notFound().build()`              | 404 Not Found        |
+| `noContent().build()`             | 204 No Content       |
+| `headers(HttpHeaders).body(body)` | Add custom headers   |
+ 
