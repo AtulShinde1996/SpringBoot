@@ -1,0 +1,59 @@
+1️⃣ Spring Core
+
+What it is:
+Spring Core provides the foundation of the Spring framework. It handles object creation, lifecycle, and configuration.
+-----------------------------------------------------------------------------------------------------------------------
+Key Concepts:
+
+Beans & BeanFactory / ApplicationContext
+
+Bean = Object managed by Spring container
+
+BeanFactory – basic container
+
+ApplicationContext – advanced container (events, internationalization)
+--------------------------------------------------------------------------------------------------
+
+Bean Scope
+
+Singleton, Prototype, Request, Session, GlobalSession
+
+
+-----------------------------------------------------------------------------------------
+
+Bean Lifecycle
+
+Initialization, destruction, @PostConstruct, @PreDestroy
+
+Configuration
+
+XML-based (legacy)
+
+Annotation-based (@Component, @Configuration, @Bean)
+
+Java-based config (modern, recommended)
+
+----------------------------------------------------------------------------------------------------
+
+2️⃣ Dependency Injection (DI)
+
+What it is:
+DI is the core concept of Spring: Spring injects dependencies instead of creating them manually. This makes your code loosely coupled.
+
+Types of DI:
+
+1.Constructor Injection
+
+2.Setter Injection
+
+----------------------------------------------------------------------------------------------------------
+Annotations:
+
+@Autowired → inject dependency
+
+@Qualifier → choose which bean to inject
+
+@Component → class managed by Spring
+
+@Service / @Repository / @Controller → specialized components
+-------------------------------------------------------------------------------------

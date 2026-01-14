@@ -1,0 +1,109 @@
+1️⃣ Beans & Container
+What is a Bean?
+    • A Bean is simply a Java object managed by Spring.
+    • Spring container is responsible for creating, configuring, and managing Beans.
+Spring Containers:
+    1. BeanFactory
+        ◦ Basic container
+        ◦ Provides lazy-loading of beans
+        ◦ Lightweight
+       BeanFactory factory = new XmlBeanFactory(new FileSystemResource("beans.xml"));
+    2. ApplicationContext
+        ◦ Advanced container
+        ◦ Supports events, AOP, internationalization, annotations
+        ◦ Eagerly loads beans by default
+       ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+       MyBean bean = context.getBean(MyBean.class);
+Summary: Use ApplicationContext for modern apps.
+
+------------------------------------------------------------------------------
+
+2️⃣ Bean Scopes
+
+
+Scope	Meaning
+Singleton	- 1 instance per Spring container (default)
+Prototype	- New instance every time it’s requested
+Request	-     1 instance per HTTP request (web apps)
+Session	-     1 instance per HTTP session (web apps)
+GlobalSession-	1 instance per global session (portlet apps)
+
+
+
+Singleton
+    • Default scope
+    • Only one object is created per Spring container
+    • Same instance is shared everywhere
+📌 Used for stateless services
+Why Singleton?
+    • Stateless logic
+    • Same service used by many users
+📌 Real example:
+✔ PaymentService
+✔ OrderService
+✔ EmailService
+
+
+Prototype
+    • A new object is created every time you request the bean
+    • Spring does not manage full lifecycle after creation
+📌 Used when objects hold state
+    • Why Prototype?
+    • Each request needs a new object
+📌 Real example:
+✔ Report generation
+✔ Temporary calculation objects
+
+
+Request
+    • One bean instance per HTTP request
+    • Valid only in web applications
+📌 Used for request-specific data
+    • Why Request?
+    • Data lives only for one HTTP call
+📌 Real example:
+✔ Request ID tracking
+✔ API request metadat
+
+
+Session
+    • One bean instance per HTTP session
+    • Shared across multiple requests in the same session
+📌 Used for user-specific data
+    • Why Session?
+    • Data shared across multiple requests of same user
+📌 Real example:
+✔ Logged-in user info
+✔ Shopping cart
+
+
+GlobalSession
+    • One instance per global session
+    • Used in Portlet-based applications (rare now)
+📌 Mostly not used in modern Spring Boot apps
+    • Why GlobalSession?
+    • Shared across multiple portlets
+📌 Real example:
+✔ Enterprise portal apps (very rare today)
+
+
+One-Line Memory Trick
+Singleton = App, Prototype = Object,
+Request = HTTP Call, Session = User, GlobalSession = Portlet
+
+
+---------------------------------------------------------------------------------------------------------
+
+🔁 How Spring Creates This Bean (Behind the Scenes)
+
+Spring scans packages (@ComponentScan)
+
+Finds @Component
+
+Creates object of UserService
+
+Stores it as a singleton bean (default)
+
+Injects it wherever @Autowired is used
+
+-----------------------------------------------------
