@@ -17,6 +17,7 @@ public class UserDetails {
 	public ResponseEntity<Map<String, String>> getUserList(){
 		Map<String, String> map=new LinkedHashMap<>();
 		map.put("Atul", "Backend Developer+DevOps+Cloud");
+		map.put("Rahul", "React js Developer");
 		return new ResponseEntity<Map<String,String>>(map,HttpStatus.OK);
 	}
 }
